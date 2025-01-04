@@ -19,4 +19,34 @@ h1 {
     margin: 0 auto;
     margin-top: 30px;
     border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.taskNameVisual {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.divTogetherVisual {
+    margin: 10px 0;
+    text-align: left;
+    display: flex;
+}
+
+.checkBoxVisual {
+    display: inline-block;
+}
+
+.dateUpdateVisual {
+    color: rgb(120, 120, 120);
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+    font-size: 13px;
+    word-spacing: 10px;
+}
+
+.timeUpdateVisual {
+    font-size: 12px;
+    display: none;
 }
