@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+#tasks_content{
+    min-height: 150px;
+    border: 1px solid black;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 20px;
+}
