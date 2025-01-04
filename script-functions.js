@@ -10,9 +10,7 @@ const set_all_values_roll = (list_names, the_select) => {
 
 const set_value_color = (event) => typeof(event) !== "string" ? document.querySelector("#taskNameId").style.color = values_colors[event.target.options[event.target.selectedIndex].value] : document.querySelector("#taskNameId").style.color = values_colors[event]
 
-const saveToLocalStorage = (where_name, content) => {
-    localStorage.setItem(where_name, JSON.stringify(content))
-}
+const saveToLocalStorage = (where_name, content) => localStorage.setItem(where_name, JSON.stringify(content))
 
 const createHTMLStructure = (oneToDo) => {
     let divTogether = document.createElement("div")
@@ -47,3 +45,5 @@ const createHTMLStructure = (oneToDo) => {
 
     return divTogether
 }
+
+const sent_to_completed = (completed_tasks) => localStorage.setItem("completedToDo", completed_tasks)

@@ -12,7 +12,7 @@ h1 {
     margin: 20px 0;
 }
 
-#tasks_content{
+#tasks_content, #complete_content{
     min-height: 150px;
     border: 1px solid black;
     width: 50%;
@@ -21,6 +21,12 @@ h1 {
     border-radius: 20px;
     padding: 10px 20px;
 }
+
+#complete_content {
+    margin-top: 5px;
+}
+
+
 
 .taskNameVisual {
     display: inline-block;
