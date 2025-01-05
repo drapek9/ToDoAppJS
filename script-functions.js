@@ -35,15 +35,71 @@ const createHTMLStructure = (oneToDo) => {
     divTogether.appendChild(textName)
     divTogether.appendChild(dateUpdate)
 
-    divTogether.addEventListener("mouseenter", (event) => {
-        event.target.querySelector("span").style.display = "inline-block"
-    })
+    divTogether.addEventListener("mouseenter", (event) => event.target.querySelector("span").style.display = "inline-block")
 
-    divTogether.addEventListener("mouseleave", (event) => {
-        event.target.querySelector("span").style.display = "none"
+    divTogether.addEventListener("mouseleave", (event) => event.target.querySelector("span").style.display = "none")
+
+    checkBox.addEventListener("change", (event) => {
+        markAsComplete(oneToDo)
+        writeToContent("tasks_content", allToDos)
+        writeToCompletedContent("complete_content", allCompletedToDos)
     })
 
     return divTogether
 }
 
-const sent_to_completed = (completed_tasks) => localStorage.setItem("completedToDo", completed_tasks)
+const createHTMLCompletedStructure = (oneToDo) => {
+    let divTogether = document.createElement("div")
+    let taskName = document.createElement("p")
+    let checkBox = document.createElement("input")
+    let deleteButton = document.createElement("a")
+
+    checkBox.type = "checkbox"
+
+    taskName.textContent = oneToDo.toDoName
+    deleteButton.textContent = "Delete"
+    deleteButton.href = "#"
+    checkBox.checked = true
+
+    divTogether.classList.add("divCompleteTogether")
+    taskName.classList.add("taskNameVisualCompleted")
+    deleteButton.classList.add("deleteButtonVisual")
+
+    divTogether.appendChild(checkBox)
+    divTogether.appendChild(taskName)
+    divTogether.appendChild(deleteButton)
+
+    checkBox.addEventListener("change", () => {
+        markAsToDo(oneToDo)
+        writeToContent("tasks_content", allToDos)
+        writeToCompletedContent("complete_content", allCompletedToDos)
+
+    })
+
+    deleteButton.addEventListener("click", (event) => {
+        deleteCompletedTask(oneToDo)
+        writeToCompletedContent("complete_content", allCompletedToDos)
+    })
+
+    return divTogether
+}
+
+const markAsComplete = (oneToDo) => {
+    allCompletedToDos.push(allToDos[allToDos.indexOf(oneToDo)])
+    allToDos.splice(allToDos.indexOf(oneToDo), 1)
+    saveToLocalStorage("toDos", allToDos)
+    saveToLocalStorage("completedToDo", allCompletedToDos)
+}
+
+const markAsToDo = (oneToDo) => {
+    allToDos.push(oneToDo)
+    allCompletedToDos.splice(allCompletedToDos.indexOf(oneToDo), 1)
+    saveToLocalStorage("toDos", allToDos)
+    saveToLocalStorage("completedToDo", allCompletedToDos)
+}
+
+
+const deleteCompletedTask = (oneCompleted) => {
+    allCompletedToDos.splice(allCompletedToDos.indexOf(oneCompleted), 1)
+    saveToLocalStorage("completedToDo", allCompletedToDos)
+}

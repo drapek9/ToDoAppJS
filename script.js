@@ -23,7 +23,6 @@ set_all_values_roll(Object.keys(values_colors),document.querySelector("#value_to
 const to_do_element_value = document.querySelector("#value_todo_id")
 set_value_color(to_do_element_value.options[to_do_element_value.selectedIndex].value)
 
-
 document.querySelector("#add_layout").addEventListener("submit", (event) => {
     event.preventDefault()
     let task_name = event.target.elements.taskName.value
@@ -41,19 +40,25 @@ document.querySelector("#add_layout").addEventListener("submit", (event) => {
 
         event.target.elements.taskName.value = ""
 
-        writeToContent()
+        writeToContent("tasks_content", allToDos)
     }
 })
 
 let writeToContent = (where_name, content) => {
     let contentDiv = document.querySelector(`#${where_name}`)
     contentDiv.innerHTML = ""
+    content.forEach((oneContent) => contentDiv.appendChild(createHTMLStructure(oneContent)))
+}
+
+let writeToCompletedContent = (where_name, content) => {
+    let contentCompleteDiv = document.querySelector(`#${where_name}`)
+    contentCompleteDiv.innerHTML = ""
     content.forEach((oneContent) => {
-        let structure = createHTMLStructure(oneContent)
-        contentDiv.appendChild(structure)
+        contentCompleteDiv.appendChild(createHTMLCompletedStructure(oneContent))
     })
 }
 
 writeToContent("tasks_content", allToDos)
+writeToCompletedContent("complete_content", allCompletedToDos)
 
 to_do_element_value.addEventListener("change", (event) => set_value_color(event))

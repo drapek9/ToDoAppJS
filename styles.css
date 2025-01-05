@@ -56,3 +56,28 @@ h1 {
     font-size: 12px;
     display: none;
 }
+
+.divCompleteTogether {
+    text-align: left;
+    margin: 10px 0;
+    display: flex;
+}
+
+.taskNameVisualCompleted {
+    display: inline-block;
+    text-decoration: line-through;
+    color: rgb(145, 145, 145);
+    margin-left: 10px;
+}
+
+.deleteButtonVisual {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 5px;
+    display: inline-block;
+    /* width: 100%; */
+    margin-left: auto;
+    font-size: 12px;
+}
