@@ -138,3 +138,14 @@ const sortInfToDos = (for_sort, chose_value) => {
 
     return new_value
 }
+let timeoutFieldError = null
+const showFieldError = (text) => {
+    document.querySelector("#error_input").textContent = text
+    if (timeoutFieldError !== null){
+        clearTimeout(timeoutFieldError)
+        timeoutFieldError = null
+    }
+    timeoutFieldError = setTimeout(() => {
+        document.querySelector("#error_input").textContent = ""
+    }, 3000)
+}

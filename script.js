@@ -81,3 +81,16 @@ to_do_element_value.addEventListener("change", (event) => set_value_color(event)
 document.querySelector("#sort_option").addEventListener("change", (event) => {
     writeToContent("tasks_content", allToDos)
 })
+
+document.querySelector("#taskNameId").addEventListener("input", (event) => {
+    if (event.target.value.length > 40){
+        event.target.value = event.target.value.slice(0, 40)
+        showFieldError("Max 40 letters")
+    } else if (timeoutFieldError !== null) {
+        document.querySelector("#error_input").textContent = ""
+        if (timeoutFieldError !== null){
+            clearTimeout(timeoutFieldError)
+            timeoutFieldError = null
+        }
+    }
+})

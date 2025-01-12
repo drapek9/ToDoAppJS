@@ -6,6 +6,8 @@
 
 body {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(255, 255, 255);
 }
 
 h1 {
@@ -15,9 +17,9 @@ h1 {
 #tasks_content, #complete_content{
     min-height: 150px;
     border: 1px solid black;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 20px;
     padding: 10px 20px;
     align-items: center;
@@ -32,12 +34,17 @@ h1 {
 .taskNameVisual {
     display: inline-block;
     margin-left: 10px;
+    /* background-color: red; */
+    max-width: calc(100% - 150px);
+    overflow-wrap: break-word;
+    font-size: 14px;
 }
 
 .divTogetherVisual {
     margin: 10px 0;
     text-align: left;
     display: flex;
+    align-items: center;
 }
 
 .checkBoxVisual {
@@ -63,6 +70,7 @@ h1 {
     text-align: left;
     margin: 10px 0;
     display: flex;
+    align-items: center;
 }
 
 .taskNameVisualCompleted {
@@ -70,6 +78,9 @@ h1 {
     text-decoration: line-through;
     color: rgb(145, 145, 145);
     margin-left: 10px;
+    font-size: 14px;
+    max-width: calc(100% - 80px);
+    overflow-wrap: break-word;
 }
 
 .deleteButtonVisual {
@@ -88,4 +99,15 @@ h1 {
     color: rgb(145, 145, 145);
     line-height: 100%;
     width: 100%;
+}
+
+#sort_option {
+    margin-top: 20px;
+}
+
+#error_input {
+    display: inline;
+    margin-right: 5px;
+    color: red;
+    font-size: 12px;
 }
