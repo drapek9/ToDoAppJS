@@ -28,7 +28,6 @@ document.querySelector("#add_layout").addEventListener("submit", (event) => {
     let task_name = event.target.elements.taskName.value
     if (task_name){
         // let task_color = values_colors[event.target.elements.value_todo.value]
-        console.log(window.getComputedStyle(event.target.elements.taskName).color)
         allToDos.push(
             {
                 toDoName: task_name,
@@ -44,21 +43,41 @@ document.querySelector("#add_layout").addEventListener("submit", (event) => {
     }
 })
 
-let writeToContent = (where_name, content) => {
+const writeToContent = (where_name, content) => {
+    let new_toDo = sortInfToDos(allToDos, document.querySelector("#sort_option").options[document.querySelector("#sort_option").selectedIndex].value)
     let contentDiv = document.querySelector(`#${where_name}`)
     contentDiv.innerHTML = ""
-    content.forEach((oneContent) => contentDiv.appendChild(createHTMLStructure(oneContent)))
+    new_toDo.forEach((oneContent) => contentDiv.appendChild(createHTMLStructure(oneContent)))
+    controleCreateNoToDO(contentDiv, "No task to do yet!")
 }
 
-let writeToCompletedContent = (where_name, content) => {
+const controleCreateNoToDO = (myContentDiv, text) => {
+    if (myContentDiv.innerHTML === ""){
+        let noToDoP = document.createElement("p")
+
+        noToDoP.textContent = text
+        noToDoP.classList.add("noToDoPar")
+
+        myContentDiv.appendChild(noToDoP)
+        myContentDiv.style.display = "flex"
+    } else {
+        myContentDiv.style.display = "block"
+    }
+}
+
+const writeToCompletedContent = (where_name, content) => {
     let contentCompleteDiv = document.querySelector(`#${where_name}`)
     contentCompleteDiv.innerHTML = ""
-    content.forEach((oneContent) => {
-        contentCompleteDiv.appendChild(createHTMLCompletedStructure(oneContent))
-    })
+    content.forEach((oneContent) => contentCompleteDiv.appendChild(createHTMLCompletedStructure(oneContent)))
+
+    controleCreateNoToDO(contentCompleteDiv, "No completed yet!")
 }
 
 writeToContent("tasks_content", allToDos)
 writeToCompletedContent("complete_content", allCompletedToDos)
 
 to_do_element_value.addEventListener("change", (event) => set_value_color(event))
+
+document.querySelector("#sort_option").addEventListener("change", (event) => {
+    writeToContent("tasks_content", allToDos)
+})

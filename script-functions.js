@@ -17,11 +17,14 @@ const createHTMLStructure = (oneToDo) => {
     let textName = document.createElement("p")
     let checkBox = document.createElement("input")
     let dateUpdate = document.createElement("p")
+    let deleteButton = document.createElement("a")
 
     textName.textContent = oneToDo.toDoName
+    deleteButton.textContent = "Delete"
 
     let updateDate = new Date(oneToDo.updateTime)
     dateUpdate.innerHTML = `<span class="timeUpdateVisual" name="timeUpdateVisualName">${updateDate.toTimeString().split(" ")[0]}</span>  ${updateDate.getDate().toString().padStart(2, "0")}.${(updateDate.getMonth()+1).toString().padStart(2, "0")}.${updateDate.getFullYear()}`
+    deleteButton.href = "#"
 
     checkBox.type = "checkbox"
     textName.style.color = values_colors[oneToDo.value]
@@ -30,10 +33,12 @@ const createHTMLStructure = (oneToDo) => {
     divTogether.classList.add("divTogetherVisual")
     checkBox.classList.add("checkBoxVisual")
     dateUpdate.classList.add("dateUpdateVisual")
+    deleteButton.classList.add("deleteButtonVisual")
 
     divTogether.appendChild(checkBox)
     divTogether.appendChild(textName)
     divTogether.appendChild(dateUpdate)
+    divTogether.appendChild(deleteButton)
 
     divTogether.addEventListener("mouseenter", (event) => event.target.querySelector("span").style.display = "inline-block")
 
@@ -43,6 +48,11 @@ const createHTMLStructure = (oneToDo) => {
         markAsComplete(oneToDo)
         writeToContent("tasks_content", allToDos)
         writeToCompletedContent("complete_content", allCompletedToDos)
+    })
+
+    deleteButton.addEventListener("click", () => {
+        deleteToDOTask(oneToDo)
+        writeToContent("tasks_content", allToDos)
     })
 
     return divTogether
@@ -98,8 +108,33 @@ const markAsToDo = (oneToDo) => {
     saveToLocalStorage("completedToDo", allCompletedToDos)
 }
 
+const deleteToDOTask = (oneToDo) => {
+    allToDos.splice(allToDos.indexOf(oneToDo), 1)
+    saveToLocalStorage("toDos", allToDos)
+}
 
 const deleteCompletedTask = (oneCompleted) => {
     allCompletedToDos.splice(allCompletedToDos.indexOf(oneCompleted), 1)
     saveToLocalStorage("completedToDo", allCompletedToDos)
+}
+
+const sortInfToDos = (for_sort, chose_value) => {
+    let new_value = [...for_sort]
+    if (chose_value == 1){
+        new_value.sort((a, b) => a.value.localeCompare(b.value))
+    } else if (chose_value == 2){
+        new_value.sort((a, b) => a.updateTime.localeCompare(b.updateTime))
+    } else if (chose_value == 3){
+        new_value.sort((a, b) => a.toDoName.localeCompare(b.toDoName))
+    } else if (chose_value == 4){
+        new_value.sort((a, b) => v.value.localeCompare(a.value))
+    } else if (chose_value == 5){
+        new_value.sort((a, b) => b.updateTime.localeCompare(a.updateTime))
+    } else if (chose_value == 6){
+        new_value.sort((a, b) => b.toDoName.localeCompare(a.toDoName))
+    } else {
+        console.log("neexistuje")
+    }
+
+    return new_value
 }
