@@ -7,10 +7,17 @@ let values_colors = {
     5: "#ff9100" // orange
 }
 
-const getFromLocalStorage = (where_name) => JSON.parse(localStorage.getItem(where_name))
-
 let allToDos = getFromLocalStorage("toDos")
 let allCompletedToDos = getFromLocalStorage("completedToDo")
+
+let CompletedToDosPoints = getFromLocalStorage("PointsCompleted")
+
+if (!CompletedToDosPoints){
+    CompletedToDosPoints = 0
+}
+setScore()
+
+console.log(CompletedToDosPoints)
 if (!allToDos){
     allToDos = []
 }
